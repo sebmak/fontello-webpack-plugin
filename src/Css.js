@@ -39,7 +39,7 @@ const ICON_CSS = ({ className, code }) => `
 
 /**
  * Css source
- * 
+ *
  * @class Css
  */
 class Css {
@@ -47,7 +47,7 @@ class Css {
 	 * @param {Object} options.config
 	 * @param {Array} options.fonts       - Font types
 	 * @param {String=} options.className - Base class name
-	 * @param {Function} fontUrl 
+	 * @param {Function} fontUrl
 	 */
 	constructor({ config, fonts, className }, fontUrl) {
 		this.options = {
@@ -62,7 +62,7 @@ class Css {
 	}
 
 	/**
-	 * @param {String} name 
+	 * @param {String} name
 	 * @returns {String}
 	 */
 	glyphClassName(name) {
@@ -75,7 +75,7 @@ class Css {
 
 	/**
 	 * Typeface src entries
-	 * 
+	 *
 	 * @returns {String[]}
 	 * @readonly
 	 */
@@ -93,7 +93,7 @@ class Css {
 
 	/**
 	 * Css selectors applicable to all icons
-	 * 
+	 *
 	 * @returns {String[]}
 	 * @readonly
 	 */
@@ -123,15 +123,6 @@ class Css {
 	get cssText() {
 		const { fontFamily, fonts, glyphs } = this.options;
 		return [
-			FONT_FACE_CSS({
-				source: _.includes(fonts, "eot") ? FONT_SRC(this.fontUrl("eot")) : undefined,
-				sources: this.sources,
-				fontFamily
-			}),
-			GENERIC_CSS({
-				selectors: this.genericSelectors,
-				fontFamily
-			}),
 			glyphs.map(({ code, css }) =>
 				ICON_CSS({
 					className: this.glyphClassName(css),
