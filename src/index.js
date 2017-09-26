@@ -49,7 +49,7 @@ class FontelloPlugin {
 				})
 				.then(() => cb())
 			compilation.plugin("normal-module-loader", (data, cb) => {
-				console.log(getPublicPath(compilation))
+				console.log(data)
 				data.assets.css.push(getPublicPath(compilation) + cssFile)
 				cb(null, data)
 			})
