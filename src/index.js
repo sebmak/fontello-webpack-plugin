@@ -27,15 +27,28 @@ class FontelloPlugin {
 		const chunk = this.chunk
 		const fontello = new Fontello(this.options)
 
+        const fontFile = ext => (
+            compilation.getPath(output.font, { chunk })
+            .replace(/\[ext\]/g, ext)
+        )
+        const cssRelativePath = ext => path.posix.relative(
+            path.dirname(cssFile),
+            fontFile(ext)
+        )
+        const addFile = (fileName, source) => {
+            chunk.files.push(fileName)
+            compilation.assets[fileName] = source
+        }
+
         compiler.plugin('emit', (compilation, callback) => {
-        fontello.assets()
-            .then(sources => {
-                new Css(this.options, cssRelativePath)
-                for(const ext in sources) {
-                    fontFile(ext)
-                }
-            })
-            .then(() => callback())
+            fontello.assets()
+                .then(sources => {
+                    addFile(cssFile, new Css(this.options, cssRelativePath))
+                    for(const ext in sources) {
+                        addFile(fontFile(ext), sources[ext])
+                    }
+                })
+                .then(() => callback())
         })
 	}
 }
