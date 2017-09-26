@@ -48,7 +48,7 @@ class FontelloPlugin {
 					}
 				})
 				.then(() => cb())
-			compilation.plugin("normal-module-loader", cb => {
+			compilation.plugin("additional-assets", cb => {
 				compilation.chunks.push(chunk)
 				compilation.namedChunks[this.options.name] = chunk
 				cb()
