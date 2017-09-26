@@ -48,12 +48,7 @@ class FontelloPlugin {
 					}
 				})
 				.then(() => cb())
-			compilation.plugin("normal-module-loader", (data, cb) => {
-				console.log(data)
-				data.assets.css.push(getPublicPath(compilation) + cssFile)
-				cb(null, data)
-			})
-			compilation.plugin("additional-assets", cb => {
+			compilation.plugin("normal-module-loader", cb => {
 				compilation.chunks.push(chunk)
 				compilation.namedChunks[this.options.name] = chunk
 				cb()
