@@ -27,7 +27,7 @@ class FontelloPlugin {
 		const chunk = this.chunk
 		const fontello = new Fontello(this.options)
 
-        compiler.plugin('emit', (compilation, callback) => {
+        compiler.plugin('make', (compilation, callback) => {
             const cssFile = compilation.getPath(output.css, { chunk })
             const fontFile = ext => (
                 compilation.getPath(output.font, { chunk })
